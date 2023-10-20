@@ -2,7 +2,7 @@ package com.oandujar.sisu.application.usecase.impl;
 
 import com.oandujar.sisu.application.query.price.GetProductPriceQuery;
 import com.oandujar.sisu.application.querybus.QueryBus;
-import com.oandujar.sisu.application.usecase.GetProductFeeUseCase;
+import com.oandujar.sisu.domain.usecase.GetProductFeeUseCase;
 import com.oandujar.sisu.infraestructure.exception.ErrorCode;
 import com.oandujar.sisu.infraestructure.exception.NotFoundException;
 import com.oandujar.sisu.infraestructure.exception.ORMException;

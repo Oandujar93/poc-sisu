@@ -1,4 +1,4 @@
-package com.oandujar.sisu.application.usecase;
+package com.oandujar.sisu.domain.usecase;
 
 
 import com.oandujar.sisu.web.api.model.ProductPriceResponse;

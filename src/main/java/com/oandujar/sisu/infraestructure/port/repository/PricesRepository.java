@@ -1,4 +1,4 @@
-package com.oandujar.sisu.infraestructure.persistence.repository;
+package com.oandujar.sisu.infraestructure.port.repository;
 
 import com.oandujar.sisu.domain.model.Prices;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +21,5 @@ public interface PricesRepository extends JpaRepository<Prices, Long> {
             @Param("productId") Long productId,
             @Param("offsetDateTime") OffsetDateTime offsetDateTime
     );
+
 }

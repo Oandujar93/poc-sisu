@@ -1,9 +1,14 @@
 package com.oandujar.sisu.domain.model;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 
 @Entity
+@Getter
+@ToString
 @Table(name = "prices")
 public class Prices {
 
@@ -62,62 +67,5 @@ public class Prices {
         return new Prices(id, startDate, endDate, priceList, price, currency, brandId, productId, priority);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public OffsetDateTime getStartDate() {
-        return startDate;
-    }
-
-    public OffsetDateTime getEndDate() {
-        return endDate;
-    }
-
-    public Long getPriceList() {
-        return priceList;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public Long getBrandId() {
-        return brandId;
-    }
-
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public Integer getPriority() {
-        return priority;
-    }
-
-    @Override
-    public String toString() {
-        return "Prices{" +
-                "id=" + id +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", priceList=" + priceList +
-                ", price=" + price +
-                ", currency=" + currency +
-                ", brandId=" + brandId +
-                ", productId=" + productId +
-                ", priority=" + priority +
-                "}";
-    }
 }
+

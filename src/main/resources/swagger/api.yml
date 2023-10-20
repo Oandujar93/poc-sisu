@@ -1,6 +1,6 @@
 openapi: "3.0.1"
 info:
-  title: PoC SISU - Inditex
+  title: PoC Hexagonal Architecture
   description: API de sevicios, para implementar la prueba de concepto solicitada
   contact:
     name: Óscar Andújar Hinarejos

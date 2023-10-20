@@ -1,6 +1,6 @@
 package com.oandujar.sisu.infraestructure.rest.controller;
 
-import com.oandujar.sisu.application.usecase.GetProductFeeUseCase;
+import com.oandujar.sisu.domain.usecase.GetProductFeeUseCase;
 import com.oandujar.sisu.web.api.PriceApi;
 import com.oandujar.sisu.web.api.model.ProductPriceResponse;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;

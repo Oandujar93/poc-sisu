@@ -1,8 +1,14 @@
 package com.oandujar.sisu.domain.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@ToString
 @Table(name = "brand")
 public class Brand {
 
@@ -24,19 +30,5 @@ public class Brand {
         return new Brand(id, name);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String toString() {
-        return "Brand{" +
-                "id=" + id +
-                ", name=" + name +
-                "}";
-    }
 }
+
