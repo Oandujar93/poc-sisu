@@ -1,12 +1,12 @@
 package com.oandujar.sisu.application.query.price;
 
+import com.oandujar.sisu.application.dto.response.ProductPriceFeeQueryResponse;
 import com.oandujar.sisu.application.querybus.Query;
-import com.oandujar.sisu.web.api.model.ProductPriceResponse;
 
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class GetProductPriceQuery extends Query<List<ProductPriceResponse>> {
+public class GetProductPriceQuery extends Query<List<ProductPriceFeeQueryResponse>> {
 
     private final Long productId;
     private final Long brandId;
