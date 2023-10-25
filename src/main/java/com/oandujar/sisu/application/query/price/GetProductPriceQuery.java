@@ -6,7 +6,7 @@ import com.oandujar.sisu.application.querybus.Query;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class GetProductPriceQuery extends Query<List<ProductPriceFeeQueryResponse>> {
+public class GetProductPriceQuery extends Query<ProductPriceFeeQueryResponse> {
 
     private final Long productId;
     private final Long brandId;

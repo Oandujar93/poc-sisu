@@ -18,8 +18,6 @@ public class PocSisuTest {
 
     private final String BASE_URL = "http://localhost";
 
-    private String baseUrl;
-
     @BeforeEach
     public void setUp() {
         RestAssured.baseURI = BASE_URL.concat(":").concat(String.valueOf(port));
@@ -43,8 +41,8 @@ public class PocSisuTest {
                 .get("/price/brand/{brandId}/product/{productId}", brandId, productId)
                 .then().log().ifStatusCodeIsEqualTo(200)
                 .statusCode(200)
-                .body("", hasSize(1))
-                .body("[0].fee", equalTo(1));
+                .body("fee", equalTo(1))
+                .body("price", equalTo("35,50"));
     }
 
     /**
@@ -56,7 +54,7 @@ public class PocSisuTest {
         String productId = "35455";
         String offsetDateTime = "2020-06-14T16:00:00+02:00";
 
-        // Lo deben cumplir el price_list 1 y 2
+        // Lo deben cumplir el price_list 1 y 2, desempata el 2 por la prioridad
         RestAssured.given()
                 .contentType(ContentType.JSON)
                 .param("date", offsetDateTime)
@@ -64,9 +62,8 @@ public class PocSisuTest {
                 .get("/price/brand/{brandId}/product/{productId}", brandId, productId)
                 .then().log().ifStatusCodeIsEqualTo(200)
                 .statusCode(200)
-                .body("", hasSize(2))
-                .body("[0].fee", equalTo(1))
-                .body("[1].fee", equalTo(2));
+                .body("fee", equalTo(2))
+                .body("price", equalTo("25,45"));
     }
 
     /**
@@ -86,8 +83,8 @@ public class PocSisuTest {
                 .get("/price/brand/{brandId}/product/{productId}", brandId, productId)
                 .then().log().ifStatusCodeIsEqualTo(200)
                 .statusCode(200)
-                .body("", hasSize(1))
-                .body("[0].fee", equalTo(1));
+                .body("fee", equalTo(1))
+                .body("price", equalTo("35,50"));
     }
 
     /**
@@ -100,7 +97,7 @@ public class PocSisuTest {
         String productId = "35455";
         String offsetDateTime = "2020-06-15T10:00:00+02:00";
 
-        // Lo deben cumplir el price_list 1 y 3
+        // Lo deben cumplir el price_list 1 y 3, desempata el 3 por la prioridad
         RestAssured.given()
                 .contentType(ContentType.JSON)
                 .param("date", offsetDateTime)
@@ -108,9 +105,8 @@ public class PocSisuTest {
                 .get("/price/brand/{brandId}/product/{productId}", brandId, productId)
                 .then().log().ifStatusCodeIsEqualTo(200)
                 .statusCode(200)
-                .body("", hasSize(2))
-                .body("[0].fee", equalTo(1))
-                .body("[1].fee", equalTo(3));
+                .body("fee", equalTo(3))
+                .body("price", equalTo("30,50"));
     }
 
     /**
@@ -122,7 +118,7 @@ public class PocSisuTest {
         String productId = "35455";
         String offsetDateTime = "2020-06-16T21:00:00+02:00";
 
-        // Lo deben cumplir el price_list 1 y 4
+        // Lo deben cumplir el price_list 1 y 4, desempata el 4 por la prioridad
         RestAssured.given()
                 .contentType(ContentType.JSON)
                 .param("date", offsetDateTime)
@@ -130,9 +126,8 @@ public class PocSisuTest {
                 .get("/price/brand/{brandId}/product/{productId}", brandId, productId)
                 .then().log().ifStatusCodeIsEqualTo(200)
                 .statusCode(200)
-                .body("", hasSize(2))
-                .body("[0].fee", equalTo(1))
-                .body("[1].fee", equalTo(4));
+                .body("fee", equalTo(4))
+                .body("price", equalTo("38,95"));;
     }
 
 }

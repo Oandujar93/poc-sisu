@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,7 +16,10 @@ public class PricesPortImpl implements PricesPort {
     private final PricesRepository pricesRepository;
 
     @Override
-    public List<Prices> findByBrandIdProductIdAndBetweenStartDateAndEndDate(Long brandId, Long productId, OffsetDateTime date) {
-        return pricesRepository.findByBrandIdProductIdAndBetweenStartDateAndEndDate(brandId, productId, date);
+    public Optional<Prices> findByBrandIdProductIdAndBetweenStartDateAndEndDate(Long brandId, Long productId, OffsetDateTime date) {
+        return pricesRepository.findFirstByBrandIdProductIdAndBetweenStartDateAndEndDateOrderByPriority(
+                brandId,
+                productId,
+                date);
     }
 }

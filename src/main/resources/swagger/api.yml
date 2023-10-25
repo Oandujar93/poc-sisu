@@ -42,10 +42,7 @@ paths:
           content:
             application/json:
               schema:
-                type:
-                  array
-                items:
-                  $ref: '#/components/schemas/ProductPriceResponse'
+                $ref: '#/components/schemas/ProductPriceResponse'
         400:
           description: Petición mal formada
           content:

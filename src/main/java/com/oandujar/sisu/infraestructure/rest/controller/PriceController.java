@@ -22,7 +22,7 @@ public class PriceController implements PriceApi {
     private final GetProductFeeUseCase getProductFeeUseCase;
 
     @Override
-    public ResponseEntity<List<ProductPriceResponse>> getProductPrice(
+    public ResponseEntity<ProductPriceResponse> getProductPrice(
             Long brandId,
             Long productId,
             OffsetDateTime offsetDateTime) {

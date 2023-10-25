@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.Optional;
 
 @Getter
 @Builder

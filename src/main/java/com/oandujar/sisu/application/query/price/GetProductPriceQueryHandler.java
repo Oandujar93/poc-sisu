@@ -4,27 +4,28 @@ import com.oandujar.sisu.application.dto.response.ProductPriceFeeQueryResponse;
 import com.oandujar.sisu.application.querybus.QueryHandler;
 import com.oandujar.sisu.domain.model.Prices;
 import com.oandujar.sisu.domain.port.PricesPort;
+import com.oandujar.sisu.infraestructure.exception.ErrorCode;
+import com.oandujar.sisu.infraestructure.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class GetProductPriceQueryHandler implements QueryHandler<List<ProductPriceFeeQueryResponse>, GetProductPriceQuery> {
+public class GetProductPriceQueryHandler implements QueryHandler<ProductPriceFeeQueryResponse, GetProductPriceQuery> {
 
     private final PricesPort pricesPort;
 
     @Override
-    public List<ProductPriceFeeQueryResponse> handle(GetProductPriceQuery query) {
-        List<Prices> pricesPageResponse = pricesPort.findByBrandIdProductIdAndBetweenStartDateAndEndDate(
+    public ProductPriceFeeQueryResponse handle(GetProductPriceQuery query) {
+        Optional<Prices> pricesResponse = pricesPort.findByBrandIdProductIdAndBetweenStartDateAndEndDate(
                 query.brandId(), query.productId(), query.offsetDateTime()
         );
 
-        return pricesPageResponse.stream()
-                .map(ProductPriceFeeQueryResponse::fromDomain)
-                .collect(Collectors.toList());
+        return pricesResponse.isPresent() ? ProductPriceFeeQueryResponse.fromDomain(pricesResponse.get()) : null;
     }
 
 }

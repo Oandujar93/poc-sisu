@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface GetProductFeeUseCase {
 
-    List<ProductPriceResponse> execute(Long productId, Long brandId, OffsetDateTime date);
+    ProductPriceResponse execute(Long productId, Long brandId, OffsetDateTime date);
 
 }

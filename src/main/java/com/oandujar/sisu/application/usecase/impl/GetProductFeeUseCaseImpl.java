@@ -25,22 +25,22 @@ public class GetProductFeeUseCaseImpl implements GetProductFeeUseCase {
     private final ProductPriceMapper productPriceMapper = Mappers.getMapper(ProductPriceMapper.class);
 
     @Override
-    public List<ProductPriceResponse> execute(Long productId, Long brandId, OffsetDateTime offsetDateTime) {
+    public ProductPriceResponse execute(Long productId, Long brandId, OffsetDateTime offsetDateTime) {
         GetProductPriceQuery query = GetProductPriceQuery.Builder.getInstance()
                 .create(productId, brandId, offsetDateTime)
                 .build();
-        List<ProductPriceFeeQueryResponse> result;
+        ProductPriceFeeQueryResponse result;
         try {
             result = queryBus.handle(query);
         } catch (Exception e) {
             throw new ORMException(ErrorCode.ORM_ACCESS_ERROR, ErrorCode.ORM_ACCESS_ERROR.getMessage());
         }
 
-        if (result == null || result.isEmpty()) {
+        if (result == null) {
             throw new NotFoundException(ErrorCode.NOT_FOUND, ErrorCode.NOT_FOUND.getMessage());
         }
 
-        return result.stream().map(productPriceMapper::domainToDTO).collect(Collectors.toList());
+        return productPriceMapper.domainToDTO(result);
     }
 
 
