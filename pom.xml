@@ -205,8 +205,8 @@
                             <generatorName>spring</generatorName>
                             <apiPackage>${package-name}.web.api</apiPackage>
                             <modelPackage>${package-name}.web.api.model</modelPackage>
-                            <generateApiTests>false</generateApiTests>
-                            <generateModelTests>false</generateModelTests>
+                            <generateApiTests>true</generateApiTests>
+                            <generateModelTests>true</generateModelTests>
                             <generateApiDocumentation>false</generateApiDocumentation>
                             <generateModelDocumentation>false</generateModelDocumentation>
                             <configOptions>

@@ -3,6 +3,7 @@ package com.oandujar.sisu.infraestructure.exception;
 public enum ErrorCode {
 
     ACCESS_DENIED("Acceso no permitido al objeto u operacion"),
+    CONFLICT("Conflicto al realizar la operacion"),
     PARSE_ERROR("Problema al convertir entidad en dto"),
     EMPTY_PARAM_CALL_ERROR("{0}"),
     ORM_ACCESS_ERROR("No es posible acceder al origen de datos"),
