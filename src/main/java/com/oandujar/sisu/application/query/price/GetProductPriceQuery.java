@@ -4,7 +4,6 @@ import com.oandujar.sisu.application.dto.response.ProductPriceFeeQueryResponse;
 import com.oandujar.sisu.application.querybus.Query;
 
 import java.time.OffsetDateTime;
-import java.util.List;
 
 public class GetProductPriceQuery extends Query<ProductPriceFeeQueryResponse> {
 

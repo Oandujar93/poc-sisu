@@ -4,14 +4,10 @@ import com.oandujar.sisu.application.dto.response.ProductPriceFeeQueryResponse;
 import com.oandujar.sisu.application.querybus.QueryHandler;
 import com.oandujar.sisu.domain.model.Prices;
 import com.oandujar.sisu.domain.port.PricesPort;
-import com.oandujar.sisu.infraestructure.exception.ErrorCode;
-import com.oandujar.sisu.infraestructure.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

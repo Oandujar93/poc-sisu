@@ -1,7 +1,6 @@
 package com.oandujar.sisu.infraestructure.port.repository;
 
 import com.oandujar.sisu.domain.model.Prices;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

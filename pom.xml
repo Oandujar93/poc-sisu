@@ -24,6 +24,7 @@
         <io.rest-assured.version>4.0.0</io.rest-assured.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <junit-jupiter.version>5.10.0</junit-jupiter.version>
 
         <package-name>com.oandujar.sisu</package-name>
     </properties>
@@ -131,6 +132,12 @@
             <version>${io.rest-assured.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
