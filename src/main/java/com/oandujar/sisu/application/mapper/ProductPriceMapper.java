@@ -21,7 +21,7 @@ public interface ProductPriceMapper {
             return null;
         }
 
-        return String.format("%.2f", price);
+        return String.format("%.2f", price).replace(".", ",");
     }
 
 }
