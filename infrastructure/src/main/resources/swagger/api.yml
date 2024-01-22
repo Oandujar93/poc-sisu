@@ -1,0 +1,306 @@
+openapi: "3.0.1"
+info:
+  title: PoC Hexagonal Architecture
+  description: API de sevicios, para implementar la prueba de concepto solicitada
+  contact:
+    name: Óscar Andújar Hinarejos
+    email: oandujar@minsait.com
+  version: 1.0.0
+paths:
+  /product/{productId}:
+    get:
+      summary: Servicio que permite obtener la información de un producto.
+      operationId: getProductById
+      tags:
+        - Products
+      parameters:
+        - name: productId
+          in: path
+          description: Id del producto.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Información del producto y marca relacionada con la tarifa a aplicar, fechas de aplicación y precio final.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPriceResponse'
+        400:
+          description: Petición mal formada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        401:
+          description: No se permite realizar esa acción, permiso denegado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        403:
+          description: Acceso prohibido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        409:
+          description: Error al ejecutar la petición
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /product:
+    post:
+      summary: Servicio de búsqueda avanzada de un producto.
+      operationId: getProducts
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchProductFilterRequest'
+      responses:
+        200:
+          description: Información del producto y marca relacionada con las tarifa a aplicar, fechas de aplicación y precio final.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageProductPriceResponse'
+        400:
+          description: Petición mal formada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        401:
+          description: No se permite realizar esa acción, permiso denegado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        403:
+          description: Acceso prohibido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        409:
+          description: Error al ejecutar la petición
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /product/{productId}/brand/{brandId}/fee:
+    get:
+      summary: Servicio que permite obtener la tarifa a aplicar por fecha para un producto y una marca definida.
+      operationId: getProductPrice
+      tags:
+        - Products
+      parameters:
+        - name: productId
+          in: path
+          description: Id del producto.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: brandId
+          in: path
+          description: Id de la marca.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: applicationDate
+          in: query
+          description: Fecha de aplicación de la tarifa.
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Número de página
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: Tamaño de la página
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: sort
+          in: query
+          description: Orden de la página
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: Información del producto y marca relacionada con la tarifa a aplicar, fechas de aplicación y precio final.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceResponse'
+        400:
+          description: Petición mal formada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        401:
+          description: No se permite realizar esa acción, permiso denegado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        403:
+          description: Acceso prohibido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        409:
+          description: Error al ejecutar la petición
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    PagePriceResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+              $ref: '#/components/schemas/PriceResponse'
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+        isLast:
+          type: boolean
+        isFirst:
+          type: boolean
+        pageSize:
+          type: integer
+        pageNumber:
+          type: integer
+    PageProductPriceResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductPriceResponse'
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+        isLast:
+          type: boolean
+        isFirst:
+          type: boolean
+        pageSize:
+          type: integer
+        pageNumber:
+          type: integer
+    ProductPriceResponse:
+      title: ProductResponse
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        brand:
+          type: object
+          $ref: '#/components/schemas/BrandResponse'
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceResponse'
+    PriceResponse:
+      title: PriceResponse
+      type: object
+      properties:
+        fee:
+          type: integer
+          format: int64
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        price:
+          type: string
+        currency:
+          type: string
+        priority:
+          type: integer
+          format: int32
+    BrandResponse:
+      title: BrandResponse
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    SearchProductFilterRequest:
+      title: SearchProductFilterRequest
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+        brandId:
+          type: integer
+          format: int64
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        sort:
+          type: string

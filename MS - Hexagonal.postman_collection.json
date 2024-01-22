@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "2710d8c9-1ac4-432b-9a9f-9c0e4d542690",
+		"name": "MS - Hexagonal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10093746"
+	},
+	"item": [
+		{
+			"name": "GET - Get current product price",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/35455/brand/1/fee?applicationDate=2020-11-16T16:00:00+02:00&page=0&size=10&sort=id,ASC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"35455",
+						"brand",
+						"1",
+						"fee"
+					],
+					"query": [
+						{
+							"key": "applicationDate",
+							"value": "2020-11-16T16:00:00+02:00"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "sort",
+							"value": "id,ASC"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Get product price by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/35455",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"35455"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Advanced product search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"productId\": 35455,\n  \"brandId\": 1,\n  \"page\": 0,\n  \"size\": 10,\n  \"sort\": \"id,ASC\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
