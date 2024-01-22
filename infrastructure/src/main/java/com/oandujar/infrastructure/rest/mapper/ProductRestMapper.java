@@ -23,15 +23,6 @@ import java.util.stream.Collectors;
 @Mapper
 public interface ProductRestMapper {
 
-/*    @Mapping(source = "pageable.pageNumber", target = "pageRequest.page")
-    @Mapping(source = "pageable.pageSize", target = "pageRequest.size")
-    @Mapping(source = "applicationDate", target = "applicationDate", qualifiedByName = "mapStringToOffsetDateTime")
-    @Mapping(source = "pageable.sort", target = "pageRequest.orders", qualifiedByName = "mapSortToListOrder")
-    ProductFilter mapProductFilterRequestToProductFilter(Long productId,
-                                                         Long brandId,
-                                                         String applicationDate,
-                                                         Pageable pageable);*/
-
     @Mapping(source = "pageable.pageNumber", target = "pageRequest.page")
     @Mapping(source = "pageable.pageSize", target = "pageRequest.size")
     @Mapping(source = "pageable.sort", target = "pageRequest.orders", qualifiedByName = "mapSortToListOrder")

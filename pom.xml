@@ -88,7 +88,7 @@
         </dependency>
     </dependencies>
 
-    <!--<build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -103,7 +103,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                &lt;!&ndash; Build an executable JAR &ndash;&gt;
+                <!--Build an executable JAR-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven-jar-plugin.version}</version>
@@ -139,10 +139,6 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-        </plugins>
-    </build>-->
-    <build>
-        <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
