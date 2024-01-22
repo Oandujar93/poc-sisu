@@ -134,26 +134,6 @@ paths:
           required: false
           schema:
             type: string
-        - name: page
-          in: query
-          description: Número de página
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: size
-          in: query
-          description: Tamaño de la página
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: sort
-          in: query
-          description: Orden de la página
-          required: false
-          schema:
-            type: string
       responses:
         200:
           description: Información del producto y marca relacionada con la tarifa a aplicar, fechas de aplicación y precio final.

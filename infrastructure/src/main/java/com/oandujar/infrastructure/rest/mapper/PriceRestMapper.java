@@ -13,23 +13,22 @@ import org.mapstruct.Named;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Mapper
 public interface PriceRestMapper {
 
-    @Mapping(source = "pageable.pageNumber", target = "pageRequest.page")
-    @Mapping(source = "pageable.pageSize", target = "pageRequest.size")
-    @Mapping(source = "pageable.sort", target = "pageRequest.orders", qualifiedByName = "mapSortToListOrder")
     @Mapping(source = "applicationDate", target = "applicationDate", qualifiedByName = "mapStringToOffsetDateTime")
     PriceFilter mapPriceFilterRequestToPriceFilter(Long productId,
                                                    Long brandId,
-                                                   String applicationDate,
-                                                   Pageable pageable);
+                                                   String applicationDate);
 
     @Named("mapStringToOffsetDateTime")
     default OffsetDateTime mapStringToOffsetDateTime(String applicationDate) {
@@ -50,6 +49,20 @@ public interface PriceRestMapper {
     }
 
 
+    @Mapping(source = "price", target = "price", qualifiedByName = "mapDoublePriceToStringPriceResponse")
     PriceResponse mapPricesToPriceResponse(Prices result);
+
+    @Named("mapDoublePriceToStringPriceResponse")
+    default String mapDoublePriceToStringPriceResponse(Double price) {
+        if (price == null) {
+            return null;
+        }
+
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
+        symbols.setDecimalSeparator(',');
+
+        DecimalFormat format = new DecimalFormat("#.00", symbols);
+        return format.format(price);
+    }
 
 }

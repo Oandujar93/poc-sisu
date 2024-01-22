@@ -17,5 +17,4 @@ public class PriceFilter {
     private Long productId;
     private Long brandId;
     private OffsetDateTime applicationDate;
-    private PageRequest pageRequest;
 }

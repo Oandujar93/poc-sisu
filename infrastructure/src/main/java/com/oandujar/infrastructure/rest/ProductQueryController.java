@@ -19,6 +19,7 @@ import com.oandujar.infrastructure.web.api.model.SearchProductFilterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
@@ -35,17 +36,12 @@ public class ProductQueryController extends Controller implements ProductApi {
     @Override
     public ResponseEntity<PriceResponse> getProductPrice(Long productId,
                                                          Long brandId,
-                                                         String applicationDate,
-                                                         Integer page,
-                                                         Integer size,
-                                                         String sort) {
+                                                         String applicationDate) {
         final PriceFilter priceFilter =
                 priceRestMapper.mapPriceFilterRequestToPriceFilter(
                         productId,
                         brandId,
-                        applicationDate,
-                        PageRequest.of(page, size, stringToSort(sort))
-                );
+                        applicationDate);
         Optional<Prices> result = searchCurrentProductPriceUseCase.searchCurrentProductPrice(priceFilter);
 
         if (result == null || !result.isPresent()) {

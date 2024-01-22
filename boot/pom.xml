@@ -15,6 +15,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <openapi-generator.version>6.6.0</openapi-generator.version>
         <jackson-databind-nullable.version>0.2.1</jackson-databind-nullable.version>
+        <io.rest-assured.version>4.0.0</io.rest-assured.version>
     </properties>
 
     <dependencies>
@@ -29,6 +30,19 @@
         <dependency>
             <groupId>com.oandujar</groupId>
             <artifactId>infrastructure</artifactId>
+        </dependency>
+
+        <!-- Integration Test -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${io.rest-assured.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
