@@ -58,7 +58,7 @@ public class IntegrationTest {
 
     @ParameterizedTest(name = "Test: producto {1} de la marca {0} a las {2} tiene la tarifa {3} con un precio de {4} ")
     @MethodSource("provideParams")
-    public void testCasosReadme(Long productId, Long brandId, String applicationDate, Integer feeExpected, String priceExpected) {
+    public void readmeTestCase(Long productId, Long brandId, String applicationDate, Integer feeExpected, String priceExpected) {
         RestAssured.given()
                 .contentType(ContentType.JSON)
                 .param("applicationDate", applicationDate)

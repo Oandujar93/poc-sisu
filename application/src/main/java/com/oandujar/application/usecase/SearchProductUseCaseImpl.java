@@ -1,14 +1,10 @@
 package com.oandujar.application.usecase;
 
-import com.oandujar.application.query.product.GetProductByIdQuery;
-import com.oandujar.application.query.product.GetProductFilterQuery;
-import com.oandujar.application.querybus.QueryBus;
 import com.oandujar.domain.entity.Product;
 import com.oandujar.domain.exception.BusinessErrorType;
 import com.oandujar.domain.exception.BusinessException;
-import com.oandujar.domain.exception.InfraErrorType;
-import com.oandujar.domain.exception.InfraException;
 import com.oandujar.domain.filter.ProductFilter;
+import com.oandujar.domain.repository.ProductRepository;
 import com.oandujar.domain.shared.PageItems;
 import com.oandujar.domain.usecases.SearchProductUseCase;
 import lombok.RequiredArgsConstructor;
@@ -20,22 +16,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SearchProductUseCaseImpl implements SearchProductUseCase {
 
-    private final QueryBus queryBus;
+    private final ProductRepository productRepository;
 
     @Override
     public Optional<Product> searchProductById(Long productId) {
-        GetProductByIdQuery query = GetProductByIdQuery.Builder.getInstance()
-                .create(productId)
-                .build();
-        Optional<Product> result;
-        try {
-            result = queryBus.handle(query);
-        } catch (Exception e) {
-            throw new InfraException(InfraErrorType.ORM_CONNECTION_ERROR);
-        }
+        Optional<Product> result = productRepository.searchProductById(productId);
 
         if (result == null || !result.isPresent()) {
-            throw new BusinessException(BusinessErrorType.PRODUCT_NOT_FOUND);
+            throw new BusinessException(BusinessErrorType.PRODUCT_NOT_FOUND, String.valueOf(productId));
         }
 
         return result;
@@ -43,18 +31,10 @@ public class SearchProductUseCaseImpl implements SearchProductUseCase {
 
     @Override
     public PageItems<Product> searchPaginatedProductsByFilter(ProductFilter filter) {
-        GetProductFilterQuery query = GetProductFilterQuery.Builder.getInstance()
-                .create(filter)
-                .build();
-        PageItems<Product> result;
-        try {
-            result = queryBus.handle(query);
-        } catch (Exception e) {
-            throw new InfraException(InfraErrorType.ORM_CONNECTION_ERROR);
-        }
+        PageItems<Product> result = productRepository.searchPaginatedProductsByFilter(filter);
 
         if (result == null) {
-            throw new BusinessException(BusinessErrorType.PRODUCT_NOT_FOUND);
+            throw new BusinessException(BusinessErrorType.PRODUCT_NOT_FOUND, String.valueOf(filter.getProductId()));
         }
 
         return result;

@@ -59,17 +59,47 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
   /product:
-    post:
+    get:
       summary: Servicio de búsqueda avanzada de un producto.
       operationId: getProducts
       tags:
         - Products
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SearchProductFilterRequest'
+      parameters:
+        - name: productId
+          in: query
+          description: Id del producto.
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: brandId
+          in: query
+          description: Id de la marca.
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: page
+          in: query
+          description: Número de página.
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: Tamaño de la página.
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: sort
+          in: query
+          description: Ordenación de la página.
+          required: false
+          example: id,desc
+          schema:
+            type: string
       responses:
         200:
           description: Información del producto y marca relacionada con las tarifa a aplicar, fechas de aplicación y precio final.

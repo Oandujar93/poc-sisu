@@ -70,19 +70,10 @@
 		{
 			"name": "POST - Advanced product search",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"productId\": 35455,\n  \"brandId\": 1,\n  \"page\": 0,\n  \"size\": 10,\n  \"sort\": \"id,ASC\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:8080/product",
+					"raw": "http://localhost:8080/product?brandId=1&page=0&size=10&sort=id,ASC",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -90,6 +81,29 @@
 					"port": "8080",
 					"path": [
 						"product"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "35455",
+							"disabled": true
+						},
+						{
+							"key": "brandId",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "sort",
+							"value": "id,ASC"
+						}
 					]
 				}
 			},

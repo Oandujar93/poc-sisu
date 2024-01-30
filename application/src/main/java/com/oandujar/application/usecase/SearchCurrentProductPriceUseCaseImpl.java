@@ -1,13 +1,10 @@
 package com.oandujar.application.usecase;
 
-import com.oandujar.application.query.price.GetPriceFilterQuery;
-import com.oandujar.application.querybus.QueryBus;
 import com.oandujar.domain.entity.Prices;
 import com.oandujar.domain.exception.BusinessErrorType;
 import com.oandujar.domain.exception.BusinessException;
-import com.oandujar.domain.exception.InfraErrorType;
-import com.oandujar.domain.exception.InfraException;
 import com.oandujar.domain.filter.PriceFilter;
+import com.oandujar.domain.repository.PricesRepository;
 import com.oandujar.domain.usecases.SearchCurrentProductPriceUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,22 +15,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SearchCurrentProductPriceUseCaseImpl implements SearchCurrentProductPriceUseCase {
 
-    private final QueryBus queryBus;
+    private final PricesRepository pricesRepository;
 
     @Override
     public Optional<Prices> searchCurrentProductPrice(PriceFilter filter) {
-        GetPriceFilterQuery query = GetPriceFilterQuery.Builder.getInstance()
-                .create(filter)
-                .build();
-        Optional<Prices> result;
-        try {
-            result = queryBus.handle(query);
-        } catch (Exception e) {
-            throw new InfraException(InfraErrorType.ORM_CONNECTION_ERROR);
-        }
+        Optional<Prices> result = pricesRepository.searchCurrentProductPrice(filter);
 
         if (result == null) {
-            throw new BusinessException(BusinessErrorType.PRODUCT_NOT_FOUND);
+            throw new BusinessException(BusinessErrorType.PRICE_NOT_FOUND, String.valueOf(filter.getProductId()));
         }
 
         return result;
